@@ -1,0 +1,19 @@
+{
+  "name": "freelaunch",
+  "version": "1.0.0",
+  "description": "bcc internship project freelaunch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmpalGentong/bcc-internship.git"
+  },
+  "author": "EmpalGentong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmpalGentong/bcc-internship/issues"
+  },
+  "homepage": "https://github.com/EmpalGentong/bcc-internship#readme"
+}
