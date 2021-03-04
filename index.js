@@ -2,15 +2,18 @@ require('dotenv').config()
 const express = require('express')
 const app = express();
 const _ = require('lodash')
+const db = require('./models')
 const bodyParser = require('body-parser')
-const cors = require('cors')
 
-app.use(cors({ origin : "https://localhost:3000"}))
+
+//routes
+const userRoutes = require('./routes/user.route');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use('/user', userRoutes)
 
-
+ 
 app.get("/", (_, res) => {
     res.json(
         {
@@ -19,8 +22,11 @@ app.get("/", (_, res) => {
     )
 })
 
+db.sequelize.sync({ })
 
-const PORT = process.env.APP_PORT || 8080;
+
+
+const PORT = process.env.Port_aplikasi || 8080;
 
 app.listen(PORT, () => {
     console.log(`App is running at port ${PORT}`, ``)
