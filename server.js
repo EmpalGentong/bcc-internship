@@ -4,12 +4,9 @@ const app = express();
 const _ = require('lodash')
 const bodyParser = require('body-parser')
 const db = require('./models')
-const passport = require('passport')
-const session    = require('express-session')
+const uuid = require('uuid').v5
+const multer = require('multer')
 
-//app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); // session secret
-//app.use(passport.initialize()); 
-//app.use(passport.session());
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -17,13 +14,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.set('view-engine','ejs')
 
 const userRoutes = require('./routes/user.routes');
-
+const designRoutes = require('./routes/design.route');
 app.get('/',(req,res)=>{
     res.render('index.ejs')
 })
 
 app.use('/user', userRoutes)
-
+app.use('/design',designRoutes)
 db.sequelize.sync({ })
 
 
