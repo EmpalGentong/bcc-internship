@@ -20,4 +20,5 @@ module.exports = {
     Sequelize,
     sequelize,
     // Below is models that we must defined first
+    users,
 }
