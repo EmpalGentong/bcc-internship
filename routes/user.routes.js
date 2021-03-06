@@ -1,4 +1,5 @@
-const user = require('../controllers/user.controller')
+const passport = require('passport');
+const user = require('../controllers/user.controller');
 const router = require('express').Router();
 
 router.get('/login',(req,res)=>{
@@ -10,6 +11,13 @@ router.get('/register',(req,res)=>{
 })
 
 router.post('/register',user.create)
+
+router.post('/login',user.login)
+
+
+router.get('/dashboard', (req,res) =>{
+    res.render('dashboard.ejs')
+})
 
 
 module.exports = router

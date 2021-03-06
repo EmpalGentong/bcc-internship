@@ -4,7 +4,12 @@ const app = express();
 const _ = require('lodash')
 const bodyParser = require('body-parser')
 const db = require('./models')
+const passport = require('passport')
+const session    = require('express-session')
 
+//app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); // session secret
+//app.use(passport.initialize()); 
+//app.use(passport.session());
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
