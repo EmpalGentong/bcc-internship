@@ -1,5 +1,3 @@
-
-
 module.exports = (sequelize, Sequelize) => {
     const user = sequelize.define("users", {
         firstName: {
@@ -27,8 +25,6 @@ module.exports = (sequelize, Sequelize) => {
         password: {
             type: Sequelize.STRING,
             allowNull: false,
-            
-            // Function to automatically hash the password with bcryptjs
         },
     }, {
     })

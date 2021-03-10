@@ -10,7 +10,7 @@ const multer = require('multer')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-
+app.use(express.static("yourDesign"))
 app.set('view-engine','ejs')
 
 const userRoutes = require('./routes/user.routes');

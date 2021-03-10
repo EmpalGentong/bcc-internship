@@ -20,14 +20,12 @@ async function create(req,res,next){
                 username: data.username
             }
             const token = jwt.sign(payload, process.env.JWT_TOKEN)
-            console.log("token : "+ token)
-            res.send(post)            
+            return res.status(200).send({ token })            
         }).catch(err => {
             res.status(500).send({
                 message: "error in register"
             })
         })
-        res.redirect('/user/login')
 }
 
 function login(req, res, next) {
@@ -52,8 +50,8 @@ function login(req, res, next) {
                 username: user.username
             }
             const token = jwt.sign(payload, process.env.JWT_TOKEN)
-            console.log(token)
-            res.redirect('/user/dashboard')
+            return res.status(200).send({ token })
+            
         })
         .catch(err => {
             return next(err)

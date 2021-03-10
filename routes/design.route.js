@@ -5,25 +5,15 @@ const uuid = require('uuid').v5
 
 
 
-/*const storage = multer.diskStorage({
-    destination: (req,file,cb)=>{
-        cb(file, '../yourDesign/')
-    },
-    filename: (req,file,cb)=>{
-        const { originalName }= file; 
-        cb(null,originalName)
-    } 
-})*/
 
-const upload = multer({ dest:'uploads/'})
+
+//const upload = multer({ storage })
 
 router.get('/upload',(req,res)=>{
     res.render('uploadImage.ejs')
 })
 
-router.post('/upload',upload.single('design'),(req,res)=>{
-     res.json({ status : 'ok'})
-})
+router.post('/upload', design.upload)
 
 
 
