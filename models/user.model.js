@@ -1,3 +1,6 @@
+const bcrypt = require('bcryptjs')
+
+
 module.exports = (sequelize, Sequelize) => {
     const user = sequelize.define("users", {
         firstName: {
@@ -25,12 +28,21 @@ module.exports = (sequelize, Sequelize) => {
         password: {
             type: Sequelize.STRING,
             allowNull: false,
+
+            set(value) {
+                this.setDataValue('password', bcrypt.hashSync(value))
+            }
         },
     }, {
     })
 
-    // In here, we hide the password attribute from model instance
-    // We still can access the password, but http req cline (Postman, Insomnia) can't see it
+    user.prototype.toJSON = function () {
+        var values = Object.assign({}, this.get());
+
+        delete values.password;
+        return values;
+    }
+    return user;
     
     return user;
 }

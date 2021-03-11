@@ -5,9 +5,10 @@ const _ = require('lodash')
 const bodyParser = require('body-parser')
 const db = require('./models')
 const uuid = require('uuid').v5
-const multer = require('multer')
+const cors = require('cors')
 
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static("yourDesign"))
