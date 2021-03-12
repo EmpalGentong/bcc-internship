@@ -19,13 +19,13 @@ function create(req,res,next){
         })
     })
     .catch(err => {
-        if (err.name == 'SequelizeUniqueConstraintError' || err.phone == 'SequelizeUniqueConstraintError') {
+        if (err.name == 'SequelizeUniqueConstraintError') {
             const failResponse = {
                 success: 'false',
                 error: {
                     // Fetch
                     details: _.map(err.errors, ({ message, type }) => ({
-                        message:"username atau no telepon dipakai telah digunakan",
+                        message:"email yang dipakai telah digunakan",
                     }))
                 }
             };
