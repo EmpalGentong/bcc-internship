@@ -14,11 +14,11 @@ router.get('/upload',(req,res)=>{
 
 router.post('/upload',jwtMiddleware, design.upload)
 
-router.get('/getAll',design.getAll)
+router.get('/getAll',jwtMiddleware,design.getAll)
 
 router.get('/showAll',design.showAll)
 
-router.put('/:id/setPrice',design.setPrice)
+router.get('/:id',design.showDesign)
 
 
 module.exports = router

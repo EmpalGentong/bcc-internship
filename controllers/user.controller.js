@@ -2,7 +2,7 @@ const _ = require('lodash')
 const db = require('../models')
 const User = db.users;
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 
 function create(req,res,next){
     User.create(req.body)
@@ -39,13 +39,12 @@ function create(req,res,next){
 function login(req, res, next) {
     User.findOne({
         where: {
-            username: req.body.username
+            email: req.body.email
         },
     })
         .then(User => {
-            if (!User) return next("User with given username is not found.")
+            if (!User) return next("User with given email is not found.")
             // Need sync with bcryptjs
-            console.log(req.body.password)
             const isValid = bcrypt.compareSync(req.body.password, User.password)
             if (!isValid) {
                 return next({
@@ -90,8 +89,10 @@ function findOne(req, res, next) {
     const id = payload.id
     User.findAll({
         where: {
-
+            id: id
         }
+    }).then(data =>{
+        res.send({data})
     })
         .catch(err => {
             return next(err)

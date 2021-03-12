@@ -16,7 +16,6 @@ const storage = multer.diskStorage({
         let token = req.headers.authorization
         token = token.split(' ')[1]
         let payload = jwt.decode(token)
-        console.log(token)
         const ext = path.extname(file.originalname);
         const id = uuid();
         const filepath = `${id}${ext}`
@@ -101,23 +100,17 @@ function showAll(req, res, next) {
         })
 }
 
-function findOne(req,res,next){
-    const id = req.params.id
-    Tweet.findByPk(id)
-        .then(data => {
-            if (data == null) {
-                next("The tweet is not found")
-                return;
-            }
-            res.send(data)
-        })
-        .catch(err => {
-            next(err)
-            return
-        })
-}
 function showDesign(req,res,next){
-    const id = req.params.id
+    const id = req.params.id;
+    design.findByPk(id).then(data => {
+        if(data == null ){
+            res.json({
+                message: "desain tidak ditemukan"
+            })
+            return;
+        }
+        res.send(data)
+    })
 }
 
 function setPrice(req,res,next){
@@ -129,7 +122,9 @@ function setPrice(req,res,next){
         }
       }).then(data => {
         if (data == null) {
-            next("The Design is not found")
+            res.json({
+                message:"The Design is not found"
+            })
             return;
         }
       }).catch(err=>{
@@ -144,5 +139,6 @@ module.exports={
     upload,
     getAll,
     showAll,
+    showDesign,
     setPrice
 }

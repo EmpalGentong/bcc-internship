@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const db = require('./models')
 const uuid = require('uuid').v5
 const cors = require('cors')
-const usercon = require('./controllers/user.controller')
+
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -20,7 +20,7 @@ const designRoutes = require('./routes/design.route');
 app.get('/',(req,res)=>{
     res.render('index.ejs')
 })
-app.get('/shows',usercon.findAll)
+
 
 app.use('/user', userRoutes)
 app.use('/design',designRoutes)
