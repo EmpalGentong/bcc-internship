@@ -46,7 +46,7 @@ function login(req, res, next) {
             if (!User) return next("User with given username is not found.")
             // Need sync with bcryptjs
             console.log(req.body.password)
-            const isValid = bcrypt.compareSync(req.body.password, user.password)
+            const isValid = bcrypt.compareSync(req.body.password, User.password)
             if (!isValid) {
                 return next({
                     statusCode: 401,
@@ -55,8 +55,8 @@ function login(req, res, next) {
             }
             // If Valid
             let payload = {
-                id: user.id,
-                username: user.username
+                id: User.id,
+                username: User.username
             }
             const token = jwt.sign(payload, process.env.JWT_TOKEN)
             return res.status(201).send({

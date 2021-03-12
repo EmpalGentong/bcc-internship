@@ -117,8 +117,9 @@ function findOne(req,res,next){
         })
 }
 function showDesign(req,res,next){
-
+    const id = req.params.id
 }
+
 function setPrice(req,res,next){
     let id = req.params.id
     let price = req.body.price
@@ -143,6 +144,5 @@ module.exports={
     upload,
     getAll,
     showAll,
-    findOne,
     setPrice
 }

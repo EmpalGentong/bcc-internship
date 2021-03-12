@@ -7,7 +7,9 @@ const jwtMiddleware = require('../middlewares/jwtAuth')
 //const upload = multer({ storage })
 
 router.get('/upload',(req,res)=>{
-    res.render('uploadImage.ejs')
+    res.json({
+        message: "success"
+    })
 })
 
 router.post('/upload',jwtMiddleware, design.upload)
@@ -16,6 +18,7 @@ router.get('/getAll',design.getAll)
 
 router.get('/showAll',design.showAll)
 
+router.put('/:id/setPrice',design.setPrice)
 
 
 module.exports = router
