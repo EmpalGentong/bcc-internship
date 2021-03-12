@@ -1,8 +1,8 @@
 const{ Sequelize } = require('sequelize');
 const env = process.env;
 
-const sequelize = new Sequelize('freelaunch','user', 'freelaunch123', {
-    host: 'localhost',
+const sequelize = new Sequelize(env.DB_Name,env.DB_User, '', {
+    host: env.DB_Host,
     dialect: 'mysql'
 });
 

@@ -19,10 +19,14 @@ router.post('/login',joiMiddleware,user.login)
 
 router.get('/users',user.findAll)
 
-router.get('/:id',jwtMiddleware, user.findOne)
+router.get('/profile',jwtMiddleware, user.findOne)
+
+router.put('/update', jwtMiddleware, joiMiddleware, user.update)
 
 router.get('/dashboard', (req,res) =>{
     res.render('dashboard.ejs')
 })
+
+router.delete('/destroy', jwtMiddleware, user.destroy)
 
 module.exports = router

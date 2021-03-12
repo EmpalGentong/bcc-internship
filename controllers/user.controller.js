@@ -83,8 +83,10 @@ function findAll(_, res, next) {
 }
 
 function findOne(req, res, next) {
-    const id = req.params.id
-    console.log(id)
+    let token = req.headers.authorization
+    token = token.split(' ')[1]
+    let payload = jwt.decode(token)
+    const id = payload.id
     User.findByPk(id)
         .then(user => {
             if (!user) return next("User with given id is not found.")
@@ -110,9 +112,10 @@ function update(req, res, next) {
                     message: "Profile is not updated yet"
                 })
             }
-            res.status(200).send({
-                success: true,
-                message: "Profile is updated."
+            return res.status(200).send({
+                status:"Success",
+                message:"Pembaruan Berhasil",
+                data:{}
             })
         })
         .catch(err => {
@@ -135,22 +138,19 @@ function destroy(req, res, next) {
             if (num == 0) {
                 return next({
                     statusCode: 404,
-                    message: "Account is not deleted yet"
+                    message: "akun gagal terhapus"
                 })
             }
             res.status(200).send({
-                success: true,
-                message: "Account is deleted."
+                status:"Success",
+                message:"Penghapusan akun Berhasil",
+                data:{}
             })
         })
         .catch(err => {
             return next(err)
         })
 }
-
-
-
-
 
 module.exports ={
     create,
