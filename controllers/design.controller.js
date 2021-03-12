@@ -65,6 +65,14 @@ function getAll(req, res, next) {
         where: id === design.id
      })
         .then(design => {
+            if (design.length == 0) {
+                res.send({
+                    status: "Failure",
+                    message: "No data is existed",
+                    data:{}
+
+                })
+            }
             res.status(200).send({ design })
         })
         .catch(err => {
@@ -73,7 +81,68 @@ function getAll(req, res, next) {
         })
 }
 
+function showAll(req, res, next) {
+    var condition = true
+    design.findAll({ where: condition })
+        .then(data => {
+            if (data.length == 0) {
+                res.send({
+                    status: "Failure",
+                    message: "No data is existed",
+                    data:{}
+
+                })
+            }
+            res.send(data)
+        })
+        .catch(err => {
+            next(err)
+            return;
+        })
+}
+
+function findOne(req,res,next){
+    const id = req.params.id
+    Tweet.findByPk(id)
+        .then(data => {
+            if (data == null) {
+                next("The tweet is not found")
+                return;
+            }
+            res.send(data)
+        })
+        .catch(err => {
+            next(err)
+            return
+        })
+}
+function showDesign(req,res,next){
+
+}
+function setPrice(req,res,next){
+    let id = req.params.id
+    let price = req.body.price
+    design.update({ price: price }, {
+        where: {
+          id: id
+        }
+      }).then(data => {
+        if (data == null) {
+            next("The Design is not found")
+            return;
+        }
+      }).catch(err=>{
+          next(err)
+          return;
+      });
+
+}
+
+
 module.exports={
     upload,
     getAll,
+    showAll,
+    findOne,
+    setPrice
 }

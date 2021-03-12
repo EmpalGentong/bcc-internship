@@ -43,6 +43,4 @@ module.exports = (sequelize, Sequelize) => {
         return values;
     }
     return user;
-    
-    return user;
 }

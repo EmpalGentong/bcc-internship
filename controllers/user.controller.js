@@ -42,9 +42,10 @@ function login(req, res, next) {
             username: req.body.username
         },
     })
-        .then(user => {
-            if (!user) return next("User with given username is not found.")
+        .then(User => {
+            if (!User) return next("User with given username is not found.")
             // Need sync with bcryptjs
+            console.log(req.body.password)
             const isValid = bcrypt.compareSync(req.body.password, user.password)
             if (!isValid) {
                 return next({
@@ -87,11 +88,11 @@ function findOne(req, res, next) {
     token = token.split(' ')[1]
     let payload = jwt.decode(token)
     const id = payload.id
-    User.findByPk(id)
-        .then(user => {
-            if (!user) return next("User with given id is not found.")
-            res.status(200).send({ user })
-        })
+    User.findAll({
+        where: {
+
+        }
+    })
         .catch(err => {
             return next(err)
         })
@@ -152,11 +153,11 @@ function destroy(req, res, next) {
         })
 }
 
-module.exports ={
+module.exports = {
     create,
     login,
     findAll,
-    findOne,
     update,
-    destroy
+    destroy,
+    findOne,
 }

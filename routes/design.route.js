@@ -14,6 +14,8 @@ router.post('/upload',jwtMiddleware, design.upload)
 
 router.get('/getAll',design.getAll)
 
+router.get('/showAll',design.showAll)
+
 
 
 module.exports = router
