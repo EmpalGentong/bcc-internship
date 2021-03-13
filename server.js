@@ -18,7 +18,9 @@ const userRoutes = require('./routes/user.routes');
 const designRoutes = require('./routes/design.route');
 
 app.get('/',(req,res)=>{
-    res.render('index.ejs')
+    res.json({
+        message:"welcome to freelaunch"
+    })
 })
 
 

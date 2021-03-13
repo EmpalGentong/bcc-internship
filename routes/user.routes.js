@@ -1,5 +1,5 @@
-const passport = require('passport');
 const user = require('../controllers/user.controller');
+const bio = require('../controllers/bio.controller');
 const router = require('express').Router();
 const joiMiddleware = require('../middlewares/joiValidator')
 const jwtMiddleware = require('../middlewares/jwtAuth')
@@ -34,5 +34,15 @@ router.get('/dashboard', (req,res) =>{
 })
 
 router.delete('/destroy', jwtMiddleware, user.destroy)
+
+
+
+//bio
+
+router.post('/bio/create',jwtMiddleware,bio.create)
+
+router.put('/bio/update',jwtMiddleware,bio.updates)
+
+router.get('/bio',jwtMiddleware,bio.showBio)
 
 module.exports = router
